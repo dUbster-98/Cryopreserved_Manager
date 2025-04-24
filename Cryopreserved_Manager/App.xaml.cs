@@ -56,6 +56,8 @@ namespace Cryopreserved_Manager
                 services.AddSingleton<RequestViewModel>();
                 services.AddSingleton<LoginPage>();
                 services.AddSingleton<LoginViewModel>();
+                services.AddSingleton<BarcodeSetPage>();
+                services.AddSingleton<BarcodeSetViewModel>();
 
             }).Build();
 

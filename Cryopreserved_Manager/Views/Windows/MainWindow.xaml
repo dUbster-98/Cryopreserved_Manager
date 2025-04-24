@@ -8,11 +8,11 @@
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     xmlns:page="clr-namespace:Cryopreserved_Manager.Views.Pages"
     Title="{Binding ApplicationTitle, Mode=OneWay}"
-    Width="1024"
+    Width="1280"
     Height="850"
     d:DataContext="{d:DesignInstance local:MainWindow,
                                      IsDesignTimeCreatable=True}"
-    d:DesignHeight="650"
+    d:DesignHeight="800"
     d:DesignWidth="800"
     ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
@@ -80,14 +80,23 @@
                     Visibility="{Binding IsMenuVisible, Converter={StaticResource BoolToVisibilityConverter}}">
                 </ui:NavigationViewItem>
             </ui:NavigationView.MenuItems>
+            
             <ui:NavigationView.FooterMenuItems>
+                <ui:NavigationViewItem
+                    Icon="{ui:SymbolIcon Symbol=BarcodeScanner24, FontSize=20, Filled=True}"
+                    Content="Barcode Set"
+                    FontWeight="Bold"
+                    Command="{Binding NavigateForwardCommand}"
+                    CommandParameter="{x:Type page:BarcodeSetPage}"
+                    Visibility="{Binding IsMenuVisible, Converter={StaticResource BoolToVisibilityConverter}}">
+                </ui:NavigationViewItem>
                 <ui:NavigationViewItem
                     Icon="{ui:SymbolIcon Symbol=Settings24, FontSize=20, Filled=True}"
                     Content="Settings"
                     FontWeight="Bold"
                     Command="{Binding NavigateForwardCommand}"
                     CommandParameter="{x:Type page:SettingsPage}"
-                    Visibility="{Binding IsMenuVisible, Converter={StaticResource BoolToVisibilityConverter}}">
+                    Visibility="{Binding IsMenuVisible, Converter={StaticResource BoolToVisibilityConverter}}" Cursor="Hand">
                 </ui:NavigationViewItem>
                 <ui:NavigationViewItem
                     Icon="{ui:SymbolIcon Symbol=Power24, FontSize=20, Filled=True}"
