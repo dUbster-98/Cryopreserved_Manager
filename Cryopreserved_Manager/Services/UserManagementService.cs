@@ -30,6 +30,8 @@ namespace Cryopreserved_Manager.Services
         string GetUserStatus(string userID);
         bool IsNeedChangePassword(string userID);
         bool UserLogin(string userID, string password);
+        UserInfo GetLoggedInUser();
+        List<UserInfo> GetUserList();
     }
 
     public class UserManagementService : IUserManagementService
