@@ -9,7 +9,7 @@
     xmlns:page="clr-namespace:Cryopreserved_Manager.Views.Pages"
     Title="{Binding ApplicationTitle, Mode=OneWay}"
     Width="1280"
-    Height="850"
+    Height="900"
     d:DataContext="{d:DesignInstance local:MainWindow,
                                      IsDesignTimeCreatable=True}"
     d:DesignHeight="800"
@@ -38,7 +38,6 @@
             PaneDisplayMode="Left"
             x:Name="RootNavigation"
             Padding="42,0,42,0"
-            BreadcrumbBar="{Binding ElementName=BreadcrumbBar}"
             FrameMargin="0"
             IsBackButtonVisible="{Binding IsMenuVisible, Converter={StaticResource BoolToVisibilityConverter}}"
             IsPaneToggleVisible="{Binding IsMenuVisible, Converter={StaticResource BoolToVisibilityConverter}}"
@@ -60,7 +59,7 @@
                     Content="Add Inventory"
                     FontWeight="Bold"
                     Command="{Binding NavigateForwardCommand}"
-                    CommandParameter="{x:Type page:HomePage}"            
+                    CommandParameter="{x:Type page:WarehousingPage}"            
                     Visibility="{Binding IsMenuVisible, Converter={StaticResource BoolToVisibilityConverter}}">
                 </ui:NavigationViewItem>
                 <ui:NavigationViewItem

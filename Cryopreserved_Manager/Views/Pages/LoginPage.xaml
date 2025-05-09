@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Cryopreserved_Manager.Views.Pages"
       xmlns:helper="clr-namespace:Cryopreserved_Manager.Helpers"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
       mc:Ignorable="d" 
       d:DesignHeight="800" d:DesignWidth="800"
       Title="LoginPage">
@@ -22,16 +23,32 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
+        
+        <Rectangle Grid.Row="1"
+                   Width="400" Height="350"
+                   HorizontalAlignment="Center" Grid.ColumnSpan="3" Grid.RowSpan="4"
+                   VerticalAlignment="Center" Fill="#EEEEEE"
+                   Margin="0 0 0 30"/>
+        <Ellipse Grid.Row="1"
+                 Width="100" Height="100"
+                 Grid.ColumnSpan="3" Grid.RowSpan="2"
+                 Fill="#AAAAAA"
+                 Margin="0 0 0 100"/>
+        <ui:SymbolIcon Grid.Row="1" Grid.RowSpan="2"
+                       Symbol="Person24" FontSize="70" Filled="False"                      
+                       Margin="0 0 0 100"/>
+        
         <Grid Grid.Row="0">
             <TextBlock Text="Login" FontSize="50"
-                       VerticalAlignment="Center"
+                       VerticalAlignment="Bottom"
                        FontWeight="Bold"
-                       Margin="100 0 0 0"/>
+                       HorizontalAlignment="Center"/>
         </Grid>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="1.2*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
@@ -40,9 +57,9 @@
                      Text="{Binding UserId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             </TextBox>
         </Grid>
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="1.2*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
@@ -51,7 +68,7 @@
                          Name="tb_password" VerticalAlignment="Center" Margin="10 5 10 5"/>
         </Grid>
 
-        <Grid Grid.Row="3">
+        <Grid Grid.Row="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="1*"/>
@@ -62,6 +79,5 @@
                     Command="{Binding LoginCommand}"
                     IsDefault="True"/>
         </Grid>
-
     </Grid>
 </Page>

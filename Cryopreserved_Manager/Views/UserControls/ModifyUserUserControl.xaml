@@ -1,0 +1,63 @@
+﻿<UserControl x:Class="Cryopreserved_Manager.Views.UserControls.ModifyUserUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Cryopreserved_Manager.Views.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="First Name" HorizontalAlignment="Right" VerticalAlignment="center" Margin="0 0 10 0"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Name="tb_firstName" VerticalAlignment="center" Margin="10 0 10 0"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Last Name" HorizontalAlignment="Right" VerticalAlignment="center" Margin="0 0 10 0"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Name="tb_lastName" VerticalAlignment="center" Margin="10 0 10 0"/>
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="User ID" HorizontalAlignment="Right" VerticalAlignment="center" Margin="0 0 10 0"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Name="tb_userID" VerticalAlignment="center" Margin="10 0 10 0"/>
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="Status" HorizontalAlignment="Right" VerticalAlignment="center" Margin="0 0 10 0"/>
+            <ComboBox Grid.Row="3" Grid.Column="1" Name="cb_status" VerticalAlignment="center" Margin="10 0 10 0">
+            </ComboBox>
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="Role" HorizontalAlignment="Right" VerticalAlignment="center" Margin="0 0 10 0"/>
+            <ComboBox Grid.Row="4" Grid.Column="1" Name="cb_role" VerticalAlignment="center" Margin="10 0 10 0">
+            </ComboBox>
+            <TextBlock Grid.Row="0" Grid.Column="2" Text="Department" HorizontalAlignment="Right" VerticalAlignment="center" Margin="0 0 10 0"/>
+            <TextBox Grid.Row="0" Grid.Column="3" Name="tb_department" VerticalAlignment="center" Margin="10 0 10 0"/>
+            <TextBlock Grid.Row="1" Grid.Column="2" Text="Phone number" HorizontalAlignment="Right" VerticalAlignment="center" Margin="0 0 10 0"/>
+            <TextBox Grid.Row="1" Grid.Column="3" Name="tb_phone" VerticalAlignment="center" Margin="10 0 10 0"/>
+            <TextBlock Grid.Row="2" Grid.Column="2" Text="Email Address" HorizontalAlignment="Right" VerticalAlignment="center" Margin="0 0 10 0"/>
+            <TextBox Grid.Row="2" Grid.Column="3" Name ="tb_email" VerticalAlignment="center" Margin="10 0 10 0"/>
+            <TextBlock Grid.Row="3" Grid.Column="2" Text="Password" HorizontalAlignment="Right" VerticalAlignment="center" Margin="0 0 10 0"/>
+            <PasswordBox Grid.Row="3" Grid.Column="3" Name="tb_password" VerticalAlignment="center" Margin="10 0 10 0" PasswordChar="*"/>
+            <TextBlock Grid.Row="4" Grid.Column="2" Text="Confirm Password" HorizontalAlignment="Right" VerticalAlignment="center"/>
+            <PasswordBox Grid.Row="4" Grid.Column="3" Name="tb_confirmPassword" VerticalAlignment="center" Margin="10 0 10 0" PasswordChar="*"/>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Button Name="btn_Done" Grid.Column="3" Content="Done" Margin="5 5 5 5"/>
+            <Button Name="btn_Cancel" Grid.Column="4" Content="Cancel" Margin="5 5 5 5"/>
+        </Grid>
+    </Grid>
+</UserControl>

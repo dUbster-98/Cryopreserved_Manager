@@ -5,25 +5,23 @@ using System.Text;
 using System.Threading.Tasks;
 using Wpf.Ui.Abstractions.Controls;
 
-namespace Cryopreserved_Manager.ViewModels.Pages
+namespace Cryopreserved_Manager.ViewModels.UserControls
 {
-    public partial class RequestViewModel : ObservableObject, INavigationAware
+    public partial class ModifyUserViewModel :ObservableObject, INavigationAware
     {
         private bool _isInitialized = false;
-
         [ObservableProperty]
-        private string? docNum;
+        private string userId = string.Empty;
         [ObservableProperty]
-        private string? department;
+        private string password = string.Empty;
         [ObservableProperty]
-        private string? userName;
+        private string name = string.Empty;
         [ObservableProperty]
-        private string? cellToUse;
+        private string department = string.Empty;
         [ObservableProperty]
-        private string? requestDate;
+        private string position = string.Empty;
         [ObservableProperty]
-        private string? useDate;
-
+        private bool isAdmin = false;
         public Task OnNavigatedToAsync()
         {
             if (!_isInitialized)
@@ -35,5 +33,6 @@ namespace Cryopreserved_Manager.ViewModels.Pages
         {
             _isInitialized = true;
         }
+
     }
 }

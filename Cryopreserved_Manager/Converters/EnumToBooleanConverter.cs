@@ -2,7 +2,7 @@
 using System.Windows.Data;
 using Wpf.Ui.Appearance;
 
-namespace Cryopreserved_Manager.Helpers
+namespace Cryopreserved_Manager.Converters
 {
     internal class EnumToBooleanConverter : IValueConverter
     {

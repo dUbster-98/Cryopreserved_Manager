@@ -7,8 +7,10 @@ using System.Windows.Threading;
 using Cryopreserved_Manager.Services;
 using Cryopreserved_Manager.ViewModels.Pages;
 using Cryopreserved_Manager.ViewModels.Windows;
+using Cryopreserved_Manager.ViewModels.UserControls;
 using Cryopreserved_Manager.Views.Pages;
 using Cryopreserved_Manager.Views.Windows;
+using Cryopreserved_Manager.Views.UserControls;
 using Wpf.Ui;
 using Wpf.Ui.DependencyInjection;
 
@@ -38,6 +40,7 @@ namespace Cryopreserved_Manager
                 services.AddSingleton<ITaskBarService, TaskBarService>();
                 // Service containing navigation, same as INavigationWindow... but without window
                 services.AddSingleton<INavigationService, NavigationService>();
+                services.AddSingleton<ISnackbarService, SnackbarService>();
                 services.AddSingleton<IUserManagementService, UserManagementService>();
 
                 // Main window with navigation
@@ -58,6 +61,10 @@ namespace Cryopreserved_Manager
                 services.AddSingleton<LoginViewModel>();
                 services.AddSingleton<BarcodeSetPage>();
                 services.AddSingleton<BarcodeSetViewModel>();
+                services.AddSingleton<WarehousingPage>();
+                services.AddSingleton<WarehousingViewModel>();
+                services.AddSingleton<ModifyUserUserControl>(); 
+                services.AddSingleton<ModifyUserViewModel>();
 
             }).Build();
 

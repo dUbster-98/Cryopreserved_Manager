@@ -11,17 +11,23 @@ using System.Text;
 using System.Threading.Tasks;
 using Wpf.Ui;
 using Wpf.Ui.Abstractions.Controls;
+using Wpf.Ui.Controls;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using MessageBox = System.Windows.MessageBox;
 
 namespace Cryopreserved_Manager.ViewModels.Pages
 {
-    public partial class LoginViewModel(INavigationService navigationService, IUserManagementService userManagementService) : ObservableObject, INavigationAware
+    public partial class LoginViewModel(INavigationService navigationService, IUserManagementService userManagementService, 
+                                        ISnackbarService snackbarService) : ObservableObject, INavigationAware
     {
         private bool _isInitialized = false;
         [ObservableProperty]
         private string userId = "";
         [ObservableProperty]
         private string password = "";
+
+        private ControlAppearance _snackbarAppearance = ControlAppearance.Secondary;
+        private int _snackbarTimeout = 2;
 
         public Task OnNavigatedToAsync()
         {
@@ -32,7 +38,9 @@ namespace Cryopreserved_Manager.ViewModels.Pages
         public Task OnNavigatedFromAsync() => Task.CompletedTask;
         private void InitializeViewModel()
         {
-            
+            _ = navigationService.Navigate(typeof(HomePage)); // 로그인 성공
+            var message = new TransferMenuVisibility { isVisible = true };
+            WeakReferenceMessenger.Default.Send(message);
 
             _isInitialized = true;
         }
@@ -56,7 +64,11 @@ namespace Cryopreserved_Manager.ViewModels.Pages
             {
                 int ret = userManagementService.GetPWRetry(UserId);
                 if (ret == -1)
+                {
                     MessageBox.Show("Please check your ID and password.");
+                    return;
+                }
+
                 else if (ret < 5)
                 {
                     if (UserId == "Admin")

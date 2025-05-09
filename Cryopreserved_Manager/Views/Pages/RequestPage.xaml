@@ -83,7 +83,8 @@
             </Border>
             <Border Grid.Row="0" Grid.Column="1" Style="{StaticResource BorderStyle}"
                     Margin="0 0 50 30">
-                <TextBox Style="{StaticResource TextBoxStyle}"/>
+                <TextBox Style="{StaticResource TextBoxStyle}"
+                         Text="{Binding DocNum, Mode=TwoWay}"/>
             </Border>
 
             <Grid Grid.Row="0" Grid.Column="2" 
@@ -118,21 +119,24 @@
                 <TextBlock Text="부 서 명" Style="{StaticResource HeaderStyle}"/>
             </Border>
             <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource BorderStyle}">
-                <TextBox Style="{StaticResource TextBoxStyle}"/>
+                <TextBox Style="{StaticResource TextBoxStyle}"
+                         Text="{Binding Department, Mode=TwoWay}"/>
             </Border>
             
             <Border Grid.Row="2" Grid.Column="0" Style="{StaticResource BorderStyle}" Background="#E6E6FA">
                 <TextBlock Text="신청자명" Style="{StaticResource HeaderStyle}"/>
             </Border>
             <Border Grid.Row="2" Grid.Column="1" Style="{StaticResource BorderStyle}">
-                <TextBox Style="{StaticResource TextBoxStyle}"/>
+                <TextBox Style="{StaticResource TextBoxStyle}"
+                         Text="{Binding UserName, Mode=TwoWay}"/>
             </Border>
 
             <Border Grid.Row="3" Grid.Column="0" Style="{StaticResource BorderStyle}" Background="#E6E6FA">
                 <TextBlock Text="사용 대상" Style="{StaticResource HeaderStyle}"/>
             </Border>
             <Border Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Style="{StaticResource BorderStyle}">
-                <TextBox Style="{StaticResource TextBoxStyle}"/>
+                <TextBox Style="{StaticResource TextBoxStyle}"
+                         Text="{Binding CellToUse, Mode=TwoWay}"/>
             </Border>
 
             <Border Grid.Row="4" Grid.Column="0" Style="{StaticResource BorderStyle}" Background="#E6E6FA">

@@ -10,7 +10,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <cvts:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
-            
+            <cvts:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
+
             <ResourceDictionary.MergedDictionaries>
                 <ui:ThemesDictionary Theme="Light" />
                 <ui:ControlsDictionary />
