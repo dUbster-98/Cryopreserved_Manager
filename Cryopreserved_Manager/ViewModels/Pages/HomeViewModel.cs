@@ -15,7 +15,8 @@ namespace Cryopreserved_Manager.ViewModels.Pages
     {
         private bool _isInitialized = false;
 
-        private ObservableCollection<CellInfo> CellCollection = new();
+        [ObservableProperty]
+        private ObservableCollection<CellInfo> cellCollection = new();
         [ObservableProperty]
         private CellInfo selectedCell = new();
 
@@ -30,23 +31,24 @@ namespace Cryopreserved_Manager.ViewModels.Pages
         {
             List<CellInfo> cellInfos = cellManageService.GetAllCellInfos();
 
+            CellCollection.Clear();
             foreach (CellInfo cellInfo in cellInfos)
             {
                 CellCollection.Add(cellInfo);
             }
 
-            _isInitialized = true;
+            //_isInitialized = true;
         }
 
         [RelayCommand]
-        private void OnEdit()
+        private void Edit()
         {
-            cellManageService.ModifyCellDB(selectedCell);
+            cellManageService.ModifyCellDB(SelectedCell);
         }
         [RelayCommand]
-        private void onDelete()
+        private void Delete()
         {
-            cellManageService.DeleteCellInfo(selectedCell.Id);
+            cellManageService.DeleteCellInfo(SelectedCell.Key);
         }
     }
 }

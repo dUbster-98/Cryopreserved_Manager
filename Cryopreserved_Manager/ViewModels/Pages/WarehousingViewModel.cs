@@ -30,7 +30,7 @@ namespace Cryopreserved_Manager.ViewModels.Pages
             }
         }
         [ObservableProperty]
-        private int quantity = 0;
+        private string quantity = "0";
         [ObservableProperty]
         private string location = "";
         [ObservableProperty]
@@ -76,15 +76,13 @@ namespace Cryopreserved_Manager.ViewModels.Pages
         {
             string templatePath = TEMPLATE_DIRECTORY;
             templatePath += TEMPLATE_PATH;
-
-
             try
             {
                 bpac.DocumentClass doc = new DocumentClass();
                 if (doc.Open(templatePath) != false)
                 {
-                    doc.GetObject("Barcode").Text = $"{CellName}_{ReceiptDay}";
-                    doc.GetObject("Desc").Text = Desc;
+                    doc.GetObject("objBarcode").Text = BarcodeText;
+                    doc.GetObject("objDesc").Text = Desc;
 
                     // doc.SetMediaById(doc.Printer.GetMediaId(), true);
                     doc.StartPrint("", PrintOptionConstants.bpoDefault);
@@ -107,6 +105,22 @@ namespace Cryopreserved_Manager.ViewModels.Pages
         [RelayCommand]
         private void OnSave()
         {
+            if (CellName == "")
+            {
+                MessageBox.Show("Please enter the Cell name.");
+                return;
+            }
+            if (ReceiptDay == "")
+            {
+                MessageBox.Show("Please enter the Receipt Day.");
+                return;
+            }
+            if (CellState == "")
+            {
+                MessageBox.Show("Please enter the Cell State.");
+                return;
+            }
+
             cellInfo = new CellInfo()
             {
                 Name = CellName,

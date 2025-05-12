@@ -21,13 +21,13 @@ namespace Cryopreserved_Manager.Services
 
     public class CellManageService : ICellManageService
     {
-        public static string MyConString = "Server=127.0.0.1;Port=3306;DataBase=CellList;Uid=root;pwd=1111;";
+        public static string MyConString = "Server=127.0.0.1;Port=3306;DataBase=CellList;Uid=root;pwd=1234;";
 
         private UserInfo m_loggedInUser = new UserInfo();
-        static private List<CellInfo> cellList = new List<CellInfo>();
+        static private List<CellInfo> CellList = new List<CellInfo>();
         public CellManageService()
         {
-
+            InitializeDatabase();
         }
         public void InitializeDatabase()
         {
@@ -40,7 +40,7 @@ namespace Cryopreserved_Manager.Services
             }
             catch (Exception ex)
             {
-                string connectionString = $"Server=127.0.0.1;Port=3306,Uid=root;Pwd=1234;";
+                string connectionString = $"Server=127.0.0.1;Port=3306;Uid=root;Pwd=1234;";
                 using (var connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();
@@ -62,32 +62,24 @@ namespace Cryopreserved_Manager.Services
                     {
                         string uuid = Guid.NewGuid().ToString();
 
-                        command.CommandText = "CREATE TABLE IF NOT EXISTS CellList(CellKey VARCHAR(255) PRIMARY KEY, CellName VARCHAR(50), Quantity INT, Location VARCHAR(50), " +
+                        command.CommandText = "CREATE TABLE IF NOT EXISTS CellList(CellKey VARCHAR(255) PRIMARY KEY, CellName VARCHAR(50), Quantity VARCHAR(10), Location VARCHAR(50), " +
                             "ReceiptDay VARCHAR(50), BarcodeText VARCHAR(50), State VARCHAR(50));";
                         command.ExecuteNonQuery();
-                        // 동일한 ID 검색
-                        command.CommandText = "SELECT EXISTS(SELECT * FROM CellList WHERE UserID = @ID)";
-                        command.Parameters.AddWithValue("@ID", cellInfo.Id);
-                        object isDataExist = command.ExecuteScalar();
-                        int nDataExist = Convert.ToInt32(isDataExist);
-                        if ((int)nDataExist == 0)
-                        {
-                            // 없으면 생성
-                            command.CommandText = "INSERT INTO CellList (CellKey, CellName, Quantity, Location, ReceiptDay, BarcodeText) " +
-                                "VALUES (@key, @cellName, @quantity, @location, @receiptDay, @state)";
-                            command.Parameters.AddWithValue("@key", uuid);
-                            command.Parameters.AddWithValue("@cellName", cellInfo.Name);
-                            command.Parameters.AddWithValue("@quantity", cellInfo.Quantity);
-                            command.Parameters.AddWithValue("@location", cellInfo.Location);
-                            command.Parameters.AddWithValue("@receiptDay", cellInfo.ReceiptDay);
-                            command.Parameters.AddWithValue("@state", cellInfo.State);
-                            command.ExecuteNonQuery();
-                        }
+
+                        command.CommandText = "INSERT INTO CellList (CellKey, CellName, Quantity, Location, ReceiptDay, BarcodeText, State) " +
+                            "VALUES (@key, @cellName, @quantity, @location, @receiptDay, @barcodeText, @state)";
+                        command.Parameters.AddWithValue("@key", uuid);
+                        command.Parameters.AddWithValue("@cellName", cellInfo.Name);
+                        command.Parameters.AddWithValue("@quantity", cellInfo.Quantity);
+                        command.Parameters.AddWithValue("@location", cellInfo.Location);
+                        command.Parameters.AddWithValue("@receiptDay", cellInfo.ReceiptDay);
+                        command.Parameters.AddWithValue("@barcodeText", cellInfo.BarcodeText);
+                        command.Parameters.AddWithValue("@state", cellInfo.State);
+                        command.ExecuteNonQuery();                  
                     }
                     db.Close();
                 }
             }
-
             catch
             {
 
@@ -106,8 +98,43 @@ namespace Cryopreserved_Manager.Services
 
         public List<CellInfo> GetAllCellInfos()
         {
-            // Retrieve all cell info records from the database
-            return new List<CellInfo>();
+            CellList.Clear();
+            int id = 0;
+            try
+            {
+                using (MySqlConnection db = new MySqlConnection(MyConString))
+                {
+                    db.Open();
+                    using (var command = db.CreateCommand())
+                    {
+                        command.CommandText = "SELECT * FROM CellList";
+
+                        using (MySqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                CellInfo cell = new CellInfo();
+                                cell.Id = id++;
+                                cell.Key = reader.GetString(0);
+                                cell.Name = reader.GetString(1);
+                                cell.Quantity = reader.GetString(2);
+                                cell.Location = reader.GetString(3);
+                                cell.ReceiptDay = reader.GetString(4);
+                                cell.BarcodeText = reader.GetString(5);
+                                cell.State = reader.GetString(6);
+                                CellList.Add(cell);
+                            }
+                        }
+                    }
+                    db.Close();
+                }
+                return CellList;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+            }
         }
 
         public CellInfo GetCellInfoById(string cellId)

@@ -11,20 +11,28 @@
 
     <Grid>
         <DataGrid ItemsSource="{Binding CellCollection}"
-                  SelectedItem="{Binding SelectedCell, Mode=TwoWay}">
+                  SelectedItem="{Binding SelectedCell, Mode=TwoWay}"
+                  CanUserAddRows="False" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False"
+                  AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding ProductId}" />
-                <DataGridTextColumn Header="Name" Binding="{Binding ProductName}" />
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
                 <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" />
                 <DataGridTextColumn Header="Location" Binding="{Binding Location}" />
-                <DataGridTextColumn Header="Date of receipt" Binding="{Binding Date}" />
-                <DataGridTextColumn Header="State" Binding="{Binding Location}" />
+                <DataGridTextColumn Header="Date of receipt" Binding="{Binding ReceiptDay}" />
+                <DataGridTextColumn Header="State" Binding="{Binding State}" />
                 <DataGridTemplateColumn Header="Actions">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <ui:Button Icon="BeakerEdit24" Command="{Binding EditCommand}" />
-                                <ui:Button Icon="Delete24" Command="{Binding DeleteCommand}" />
+                                <ui:Button Command="{Binding EditCommand}" 
+                                           Appearance="Info">
+                                    <ui:SymbolIcon Symbol="Edit24"/>
+                                </ui:Button>
+                                <ui:Button Command="{Binding DeleteCommand}"
+                                           Appearance="Primary">
+                                    <ui:SymbolIcon Symbol="Delete24"/>
+                                </ui:Button>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

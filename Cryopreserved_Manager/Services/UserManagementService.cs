@@ -378,7 +378,6 @@ namespace Cryopreserved_Manager.Services
                 }
                 return true;
             }
-
             catch
             {
                 return false;
