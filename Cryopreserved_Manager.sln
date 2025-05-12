@@ -1,20 +1,26 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35806.99 d17.13
+VisualStudioVersion = 17.13.35806.99
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cryopreserved_Manager", "Cryopreserved_Manager\Cryopreserved_Manager.csproj", "{CF362D2B-D9F2-4C0A-B6F5-17AF9EA32386}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
 		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{CF362D2B-D9F2-4C0A-B6F5-17AF9EA32386}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CF362D2B-D9F2-4C0A-B6F5-17AF9EA32386}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF362D2B-D9F2-4C0A-B6F5-17AF9EA32386}.Debug|x64.ActiveCfg = Debug|x64
+		{CF362D2B-D9F2-4C0A-B6F5-17AF9EA32386}.Debug|x64.Build.0 = Debug|x64
 		{CF362D2B-D9F2-4C0A-B6F5-17AF9EA32386}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF362D2B-D9F2-4C0A-B6F5-17AF9EA32386}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF362D2B-D9F2-4C0A-B6F5-17AF9EA32386}.Release|x64.ActiveCfg = Release|x64
+		{CF362D2B-D9F2-4C0A-B6F5-17AF9EA32386}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

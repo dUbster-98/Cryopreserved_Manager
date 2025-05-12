@@ -8,6 +8,7 @@
     <UseWPF>true</UseWPF>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
@@ -39,7 +40,7 @@
 
   <ItemGroup>
     <Reference Include="Interop.bpac">
-      <HintPath>..\..\..\..\..\..\Program Files\Brother bPAC3 SDK\Samples\VCS\NamePlt\bin\Release\Interop.bpac.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Program Files\Brother bPAC3 SDK\Samples\VCS\NamePlt\obj\x64\Debug\Interop.bpac.dll</HintPath>
     </Reference>
   </ItemGroup>
 

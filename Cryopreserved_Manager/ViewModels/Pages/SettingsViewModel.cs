@@ -202,19 +202,28 @@ namespace Cryopreserved_Manager.ViewModels.Pages
                     return;
                 }
 
-                if (Password == "")
+                if (!IsValidInput(UserID))
                 {
-                    MessageBox.Show("Please enter the password");
-                    return;               
+                    MessageBox.Show("User ID must be 6 ~ 12 letters, numbers, and special characters");
+                    return;
                 }
 
-                if (Password != "")
+                if (Password == "")
                 {
-                    if (Password != ConfirmPW)
-                    {
-                        MessageBox.Show("Please confirm the password");
-                        return;
-                    }
+                    MessageBox.Show("Please enter the password.");
+                    return;
+                }
+
+                if (!IsValidPassword(Password))
+                {
+                    MessageBox.Show("Password must be 8 ~ 20 characters and must contain letters and numbers");
+                    return;
+                }
+
+                if (Password != ConfirmPW)
+                {
+                    MessageBox.Show("Please confirm the password");
+                    return;
                 }
 
                 userManagementService.ModifyUserDB(SelectedUser.Key, FirstName, LastName, Status, Role, Department, Phone, Email, Password, DateTime.Now.ToString(), "0");

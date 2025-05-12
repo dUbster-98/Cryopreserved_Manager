@@ -77,21 +77,30 @@ namespace Cryopreserved_Manager.ViewModels.Pages
             string templatePath = TEMPLATE_DIRECTORY;
             templatePath += TEMPLATE_PATH;
 
-            bpac.DocumentClass doc = new DocumentClass();
-            if (doc.Open(templatePath) != false)
-            {
-                doc.GetObject("Barcode").Text = $"{CellName}_{ReceiptDay}";
-                doc.GetObject("Desc").Text = Desc;
 
-                // doc.SetMediaById(doc.Printer.GetMediaId(), true);
-                doc.StartPrint("", PrintOptionConstants.bpoDefault);
-                doc.PrintOut(1, PrintOptionConstants.bpoDefault);
-                doc.EndPrint();
-                doc.Close();
-            }
-            else
+            try
             {
-                MessageBox.Show("Open() Error: " + doc.ErrorCode);
+                bpac.DocumentClass doc = new DocumentClass();
+                if (doc.Open(templatePath) != false)
+                {
+                    doc.GetObject("Barcode").Text = $"{CellName}_{ReceiptDay}";
+                    doc.GetObject("Desc").Text = Desc;
+
+                    // doc.SetMediaById(doc.Printer.GetMediaId(), true);
+                    doc.StartPrint("", PrintOptionConstants.bpoDefault);
+                    doc.PrintOut(1, PrintOptionConstants.bpoDefault);
+                    doc.EndPrint();
+                    doc.Close();
+                }
+
+                else
+                {
+                    MessageBox.Show("Open() Error: " + doc.ErrorCode);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
