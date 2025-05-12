@@ -35,7 +35,7 @@ namespace Cryopreserved_Manager.ViewModels.Pages
         [ObservableProperty]
         private string lastName = string.Empty;
         [ObservableProperty]
-        private string userId = string.Empty;
+        private string userID = string.Empty;
         [ObservableProperty]
         private string role = string.Empty;
         [ObservableProperty]
@@ -106,7 +106,7 @@ namespace Cryopreserved_Manager.ViewModels.Pages
             SelectedUser = selectedUser;
             FirstName = selectedUser.FirstName;
             LastName = selectedUser.LastName;
-            UserId = selectedUser.UserID;
+            UserID = selectedUser.UserID;
             Role = selectedUser.Role;
             Status = selectedUser.Status;
             Department = selectedUser.Department;
@@ -151,14 +151,14 @@ namespace Cryopreserved_Manager.ViewModels.Pages
                     return;
                 }
 
-                if (UserId == "")
+                if (UserID == "")
                 {
                     MessageBox.Show("Please enter the user ID.");
                     return;
                 }
 
                 // 6-12자의 영문, 숫자, 특수문자만 사용 가능
-                if (!IsValidInput(UserId))
+                if (!IsValidInput(UserID))
                 {
                     MessageBox.Show("User ID must be 6 ~ 12 letters, numbers, and special characters");
                     return;
@@ -183,7 +183,7 @@ namespace Cryopreserved_Manager.ViewModels.Pages
                 }
 
                 DateTime password_changed = DateTime.Today;
-                userManagementService.InsertUserDB(FirstName, LastName, UserId, Status, Role, Department, Phone, Email, Password, false, false, password_changed.ToString(), "0");
+                userManagementService.InsertUserDB(FirstName, LastName, UserID, Status, Role, Department, Phone, Email, Password, false, false, password_changed.ToString(), "0");
                 UpdateDBData();
                 CleanUserInput();
             }
@@ -201,7 +201,13 @@ namespace Cryopreserved_Manager.ViewModels.Pages
                     MessageBox.Show("Please enter the last name.");
                     return;
                 }
-                
+
+                if (Password == "")
+                {
+                    MessageBox.Show("Please enter the password");
+                    return;               
+                }
+
                 if (Password != "")
                 {
                     if (Password != ConfirmPW)
@@ -210,13 +216,16 @@ namespace Cryopreserved_Manager.ViewModels.Pages
                         return;
                     }
                 }
+
+                userManagementService.ModifyUserDB(SelectedUser.Key, FirstName, LastName, Status, Role, Department, Phone, Email, Password, DateTime.Now.ToString(), "0");
+
                 UpdateDBData();
                 CleanUserInput();
             }
 
             else if (OkBtnText == "Delete")
             {
-                userManagementService.DeleteUser(UserId);
+                userManagementService.DeleteUser(UserID);
                 UpdateDBData();
                 CleanUserInput();
             }
@@ -233,7 +242,7 @@ namespace Cryopreserved_Manager.ViewModels.Pages
             FirstName = string.Empty;
             LastName = string.Empty;
             Department = string.Empty;
-            UserId = string.Empty;
+            UserID = string.Empty;
             Role = string.Empty;
             Status = string.Empty;
             Phone = string.Empty;

@@ -10,9 +10,10 @@ namespace Cryopreserved_Manager.Models
     {
         public string? Id { get; set; }
         public string? Name { get; set; }
-        public string? Quantity { get; set; }
+        public int Quantity { get; set; }
         public string? Location { get; set; }
-        public DateTime? ReceiptDate { get; set; }
+        public string? ReceiptDay { get; set; }
+        public string? BarcodeText { get; set; }
         public string? State { get; set; }
     }
 }

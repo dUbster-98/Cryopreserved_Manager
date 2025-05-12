@@ -68,7 +68,7 @@ namespace Cryopreserved_Manager.Services
             }
             catch
             {
-                string connectionString = $"Server=127.0.0.1;Uid=root;Pwd=1234;";
+                string connectionString = $"Server=127.0.0.1;Port=3306,Uid=root;Pwd=1234;";
                 using (var connection = new MySqlConnection(connectionString))
                 {
                     connection.Open();

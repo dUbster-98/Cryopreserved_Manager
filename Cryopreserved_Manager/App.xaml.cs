@@ -42,6 +42,7 @@ namespace Cryopreserved_Manager
                 services.AddSingleton<INavigationService, NavigationService>();
                 services.AddSingleton<ISnackbarService, SnackbarService>();
                 services.AddSingleton<IUserManagementService, UserManagementService>();
+                services.AddSingleton<ICellManageService, CellManageService>();
 
                 // Main window with navigation
                 services.AddSingleton<INavigationWindow, MainWindow>();

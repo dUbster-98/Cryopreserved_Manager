@@ -4,12 +4,14 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Cryopreserved_Manager.Views.Pages"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
       mc:Ignorable="d" 
       d:DesignHeight="800" d:DesignWidth="800"
       Title="HomePage">
 
     <Grid>
-        <DataGrid ItemsSource="{Binding CellCollection, Mode=TwoWay}">
+        <DataGrid ItemsSource="{Binding CellCollection}"
+                  SelectedItem="{Binding SelectedCell, Mode=TwoWay}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding ProductId}" />
                 <DataGridTextColumn Header="Name" Binding="{Binding ProductName}" />
@@ -17,6 +19,16 @@
                 <DataGridTextColumn Header="Location" Binding="{Binding Location}" />
                 <DataGridTextColumn Header="Date of receipt" Binding="{Binding Date}" />
                 <DataGridTextColumn Header="State" Binding="{Binding Location}" />
+                <DataGridTemplateColumn Header="Actions">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <ui:Button Icon="BeakerEdit24" Command="{Binding EditCommand}" />
+                                <ui:Button Icon="Delete24" Command="{Binding DeleteCommand}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

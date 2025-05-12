@@ -93,7 +93,7 @@
 
                 <TextBlock Grid.Row="0" Grid.Column="2" Text="수량 *" Style="{StaticResource LabelStyle}"/>
                 <ui:NumberBox Grid.Column="3" PlaceholderText="숫자를 입력해주세요"
-                            Text="{Binding Amount, Mode=TwoWay}" Margin="0,0,30,0"/>
+                            Text="{Binding Quantity, Mode=TwoWay}" Margin="0,0,30,0"/>
 
                 <!-- 두 번째 행 -->
                 <TextBlock Grid.Row="2" Grid.Column="0" Text="위치 *" Style="{StaticResource LabelStyle}"/>
@@ -108,7 +108,8 @@
                 <!-- 네 번째 행 -->
                 <TextBlock Grid.Row="6" Grid.Column="0" Text="사용 상태 *" Style="{StaticResource LabelStyle}"/>
                 <ComboBox Grid.Row="6" Grid.Column="1" Background="#DDDDDD"
-                          ItemsSource="{Binding State, Mode=TwoWay}">
+                          ItemsSource="{Binding State}"
+                          Text="{Binding CellState, Mode=TwoWay}">
                 </ComboBox>
 
                 <TextBlock Grid.Row="8" Grid.Column="0" Text="바코드 *" Style="{StaticResource LabelStyle}"/>

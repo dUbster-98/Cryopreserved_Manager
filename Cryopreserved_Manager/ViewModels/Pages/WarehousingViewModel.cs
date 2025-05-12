@@ -1,4 +1,6 @@
 ﻿using bpac;
+using Cryopreserved_Manager.Models;
+using Cryopreserved_Manager.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +12,12 @@ using Wpf.Ui.Abstractions.Controls;
 
 namespace Cryopreserved_Manager.ViewModels.Pages
 {
-    public partial class WarehousingViewModel : ObservableObject, INavigationAware
+    public partial class WarehousingViewModel(ICellManageService cellManageService) : ObservableObject, INavigationAware
     {
         private const string TEMPLATE_DIRECTORY = @"C:\Users\shkim3\Documents\MyLabel\";
         private const string TEMPLATE_PATH = "Bar_Code.LBX";
+
+        private CellInfo cellInfo = new();
 
         [ObservableProperty]
         private string cellName = "";
@@ -26,7 +30,7 @@ namespace Cryopreserved_Manager.ViewModels.Pages
             }
         }
         [ObservableProperty]
-        private int amount = 0;
+        private int quantity = 0;
         [ObservableProperty]
         private string location = "";
         [ObservableProperty]
@@ -39,6 +43,9 @@ namespace Cryopreserved_Manager.ViewModels.Pages
                 BarcodeText = $"{CellName}_{formattedDate}";
             }
         }
+        [ObservableProperty]
+        private string cellState = "";
+
         [ObservableProperty]
         private List<string> state = [];
         [ObservableProperty]
@@ -64,8 +71,8 @@ namespace Cryopreserved_Manager.ViewModels.Pages
             _isInitialized = true;
         }
 
-        [RelayCommand]
-        private void OnSave()
+
+        private void PrintBarcode()
         {
             string templatePath = TEMPLATE_DIRECTORY;
             templatePath += TEMPLATE_PATH;
@@ -86,6 +93,23 @@ namespace Cryopreserved_Manager.ViewModels.Pages
             {
                 MessageBox.Show("Open() Error: " + doc.ErrorCode);
             }
+        }
+
+        [RelayCommand]
+        private void OnSave()
+        {
+            cellInfo = new CellInfo()
+            {
+                Name = CellName,
+                Quantity = Quantity,
+                Location = Location,
+                ReceiptDay = ReceiptDay,
+                BarcodeText = BarcodeText,
+                State = CellState
+            };
+            cellManageService.InsertCellDB(cellInfo);
+
+            PrintBarcode();
         }
     }
 }
