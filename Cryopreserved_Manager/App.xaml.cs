@@ -7,12 +7,12 @@ using System.Windows.Threading;
 using Cryopreserved_Manager.Services;
 using Cryopreserved_Manager.ViewModels.Pages;
 using Cryopreserved_Manager.ViewModels.Windows;
-using Cryopreserved_Manager.ViewModels.UserControls;
 using Cryopreserved_Manager.Views.Pages;
 using Cryopreserved_Manager.Views.Windows;
 using Cryopreserved_Manager.Views.UserControls;
 using Wpf.Ui;
 using Wpf.Ui.DependencyInjection;
+using System.Windows.Automation.Provider;
 
 namespace Cryopreserved_Manager
 {
@@ -43,6 +43,7 @@ namespace Cryopreserved_Manager
                 services.AddSingleton<ISnackbarService, SnackbarService>();
                 services.AddSingleton<IUserManagementService, UserManagementService>();
                 services.AddSingleton<ICellManageService, CellManageService>();
+                services.AddSingleton<WindowsProviderService>();
 
                 // Main window with navigation
                 services.AddSingleton<INavigationWindow, MainWindow>();
@@ -64,8 +65,9 @@ namespace Cryopreserved_Manager
                 services.AddSingleton<BarcodeSetViewModel>();
                 services.AddSingleton<WarehousingPage>();
                 services.AddSingleton<WarehousingViewModel>();
-                services.AddSingleton<ModifyUserUserControl>(); 
-                services.AddSingleton<ModifyUserViewModel>();
+                services.AddSingleton<ModifyUserUserControl>();
+                services.AddTransient<CellEditWindow>();
+                services.AddSingleton<CellEditViewModel>();
 
             }).Build();
 

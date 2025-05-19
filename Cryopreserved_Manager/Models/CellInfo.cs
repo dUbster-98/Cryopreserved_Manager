@@ -16,5 +16,6 @@ namespace Cryopreserved_Manager.Models
         public string? ReceiptDay { get; set; }
         public string? BarcodeText { get; set; }
         public string? State { get; set; }
+        public string? Desc { get; set; }
     }
 }

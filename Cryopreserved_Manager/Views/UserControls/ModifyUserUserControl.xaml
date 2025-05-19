@@ -6,7 +6,9 @@
              xmlns:local="clr-namespace:Cryopreserved_Manager.Views.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    
+    <Grid Grid.Row="2"
+          Visibility="{Binding IsModifyVisible, Converter={StaticResource BoolToVisibilityConverter}}">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="40"/>
@@ -26,38 +28,41 @@
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Row="0" Grid.Column="0" Text="First Name" HorizontalAlignment="Right" VerticalAlignment="center" Margin="0 0 10 0"/>
-            <TextBox Grid.Row="0" Grid.Column="1" Name="tb_firstName" VerticalAlignment="center" Margin="10 0 10 0"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding FirstName, Mode=TwoWay}" VerticalAlignment="center" Margin="10 0 10 0"/>
             <TextBlock Grid.Row="1" Grid.Column="0" Text="Last Name" HorizontalAlignment="Right" VerticalAlignment="center" Margin="0 0 10 0"/>
-            <TextBox Grid.Row="1" Grid.Column="1" Name="tb_lastName" VerticalAlignment="center" Margin="10 0 10 0"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding LastName, Mode=TwoWay}" VerticalAlignment="center" Margin="10 0 10 0"/>
             <TextBlock Grid.Row="2" Grid.Column="0" Text="User ID" HorizontalAlignment="Right" VerticalAlignment="center" Margin="0 0 10 0"/>
-            <TextBox Grid.Row="2" Grid.Column="1" Name="tb_userID" VerticalAlignment="center" Margin="10 0 10 0"/>
-            <TextBlock Grid.Row="3" Grid.Column="0" Text="Status" HorizontalAlignment="Right" VerticalAlignment="center" Margin="0 0 10 0"/>
-            <ComboBox Grid.Row="3" Grid.Column="1" Name="cb_status" VerticalAlignment="center" Margin="10 0 10 0">
-            </ComboBox>
-            <TextBlock Grid.Row="4" Grid.Column="0" Text="Role" HorizontalAlignment="Right" VerticalAlignment="center" Margin="0 0 10 0"/>
-            <ComboBox Grid.Row="4" Grid.Column="1" Name="cb_role" VerticalAlignment="center" Margin="10 0 10 0">
-            </ComboBox>
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding UserID, Mode=TwoWay}" VerticalAlignment="center" Margin="10 0 10 0"/>
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="Status" HorizontalAlignment="Right" VerticalAlignment="center" Margin="0 0 10 0"/>
+            <ComboBox Grid.Row="4" Grid.Column="1" Text="{Binding Status, Mode=TwoWay}" VerticalAlignment="center" Margin="10 0 10 0"
+                                      ItemsSource="{Binding StatusItems}"/>
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="Role" HorizontalAlignment="Right" VerticalAlignment="center" Margin="0 0 10 0"/>
+            <ComboBox Grid.Row="3" Grid.Column="1" Text="{Binding Role, Mode=TwoWay}" VerticalAlignment="center" Margin="10 0 10 0"
+                                      ItemsSource="{Binding RoleItems}"/>
             <TextBlock Grid.Row="0" Grid.Column="2" Text="Department" HorizontalAlignment="Right" VerticalAlignment="center" Margin="0 0 10 0"/>
-            <TextBox Grid.Row="0" Grid.Column="3" Name="tb_department" VerticalAlignment="center" Margin="10 0 10 0"/>
+            <TextBox Grid.Row="0" Grid.Column="3" Text="{Binding Department, Mode=TwoWay}" VerticalAlignment="center" Margin="10 0 10 0"/>
             <TextBlock Grid.Row="1" Grid.Column="2" Text="Phone number" HorizontalAlignment="Right" VerticalAlignment="center" Margin="0 0 10 0"/>
-            <TextBox Grid.Row="1" Grid.Column="3" Name="tb_phone" VerticalAlignment="center" Margin="10 0 10 0"/>
+            <TextBox Grid.Row="1" Grid.Column="3" Text="{Binding Phone, Mode=TwoWay}" VerticalAlignment="center" Margin="10 0 10 0"/>
             <TextBlock Grid.Row="2" Grid.Column="2" Text="Email Address" HorizontalAlignment="Right" VerticalAlignment="center" Margin="0 0 10 0"/>
-            <TextBox Grid.Row="2" Grid.Column="3" Name ="tb_email" VerticalAlignment="center" Margin="10 0 10 0"/>
+            <TextBox Grid.Row="2" Grid.Column="3" Text="{Binding Email, Mode=TwoWay}" VerticalAlignment="center" Margin="10 0 10 0"/>
             <TextBlock Grid.Row="3" Grid.Column="2" Text="Password" HorizontalAlignment="Right" VerticalAlignment="center" Margin="0 0 10 0"/>
-            <PasswordBox Grid.Row="3" Grid.Column="3" Name="tb_password" VerticalAlignment="center" Margin="10 0 10 0" PasswordChar="*"/>
+            <TextBox Grid.Row="3" Grid.Column="3" VerticalAlignment="center" Margin="10 0 10 0"
+                                     Text="{Binding Password}"/>
             <TextBlock Grid.Row="4" Grid.Column="2" Text="Confirm Password" HorizontalAlignment="Right" VerticalAlignment="center"/>
-            <PasswordBox Grid.Row="4" Grid.Column="3" Name="tb_confirmPassword" VerticalAlignment="center" Margin="10 0 10 0" PasswordChar="*"/>
+            <TextBox Grid.Row="4" Grid.Column="3" VerticalAlignment="center" Margin="10 0 10 0"
+                                     Text="{Binding ConfirmPW}"/>
         </Grid>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="5*"/>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <Button Name="btn_Done" Grid.Column="3" Content="Done" Margin="5 5 5 5"/>
-            <Button Name="btn_Cancel" Grid.Column="4" Content="Cancel" Margin="5 5 5 5"/>
+            <Button Grid.Column="1" Content="{Binding OkBtnText}" Margin="5 5 5 5" Width="80"
+                                    Command="{Binding DoneCommand}"/>
+            <Button Grid.Column="2" Content="Cancel" Margin="5 5 5 5" Width="80"
+                                    Command="{Binding CancelCommand}"/>
         </Grid>
     </Grid>
+    
 </UserControl>

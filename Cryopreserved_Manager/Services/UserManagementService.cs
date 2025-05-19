@@ -37,7 +37,7 @@ namespace Cryopreserved_Manager.Services
     public class UserManagementService : IUserManagementService
     {
         private static string m_DatabasePath = "C:\\ProgramData\\Cryopreserved\\etc\\user.db";
-        private static string MyConString = "Server=127.0.0.1;Port=3306;Database=AppUsers;Uid=root;pwd=1234;";
+        private static string MyConString = "Server=127.0.0.1;Port=3306;Database=Cyro;Uid=root;pwd=1234;";
         private UserInfo m_loggedInUser = new UserInfo();
         static private List<UserInfo> listUser = new List<UserInfo>();
 
@@ -73,7 +73,7 @@ namespace Cryopreserved_Manager.Services
                 {
                     connection.Open();
                     var cmd = connection.CreateCommand();
-                    cmd.CommandText = $"CREATE DATABASE IF NOT EXISTS AppUsers;";
+                    cmd.CommandText = $"CREATE DATABASE IF NOT EXISTS Cyro;";
                     cmd.ExecuteNonQuery();
                 }
 
@@ -98,7 +98,7 @@ namespace Cryopreserved_Manager.Services
 
                         command.CommandText = "CREATE TABLE IF NOT EXISTS AppUsers(UserKey VARCHAR(255) PRIMARY KEY, FirstName VARCHAR(100), LastName VARCHAR(100), UserID VARCHAR(100), " +
                             "Status VARCHAR(50), Role VARCHAR(50), Department VARCHAR(100), Phone VARCHAR(20), Email VARCHAR(100), Password VARCHAR(255), NeedResetPW TINYINT(1), " +
-                            "AdminAlarm TINYINT(1), PWChangeDate VARCHAR(50), PWRetry INT);";
+                            "AdminAlarm TINYINT(1), PWChangeDate VARCHAR(50), PWRetry VARCHAR(1));";
                         command.ExecuteNonQuery();
                         // 동일한 ID 검색
                         command.CommandText = "SELECT EXISTS(SELECT * FROM AppUsers WHERE UserID = @ID)";

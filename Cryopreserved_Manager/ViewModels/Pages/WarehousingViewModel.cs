@@ -128,7 +128,8 @@ namespace Cryopreserved_Manager.ViewModels.Pages
                 Location = Location,
                 ReceiptDay = ReceiptDay,
                 BarcodeText = BarcodeText,
-                State = CellState
+                State = CellState,
+                Desc = Desc
             };
             cellManageService.InsertCellDB(cellInfo);
 

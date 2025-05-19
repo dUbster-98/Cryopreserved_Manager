@@ -5,6 +5,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Cryopreserved_Manager.Views.Pages"
       xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      xmlns:pages="clr-namespace:Cryopreserved_Manager.ViewModels.Pages"
+      d:DataContext="{d:DesignInstance Type=pages:HomeViewModel}"
       mc:Ignorable="d" 
       d:DesignHeight="800" d:DesignWidth="800"
       Title="HomePage">
@@ -25,11 +27,11 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <ui:Button Command="{Binding EditCommand}" 
+                                <ui:Button Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" 
                                            Appearance="Info">
                                     <ui:SymbolIcon Symbol="Edit24"/>
                                 </ui:Button>
-                                <ui:Button Command="{Binding DeleteCommand}"
+                                <ui:Button Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                            Appearance="Primary">
                                     <ui:SymbolIcon Symbol="Delete24"/>
                                 </ui:Button>

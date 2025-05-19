@@ -1,5 +1,7 @@
-﻿using Cryopreserved_Manager.Models;
+﻿using CommunityToolkit.Mvvm.Messaging;
+using Cryopreserved_Manager.Models;
 using Cryopreserved_Manager.Services;
+using Cryopreserved_Manager.Views.Windows;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,7 +13,7 @@ using Wpf.Ui.Abstractions.Controls;
 
 namespace Cryopreserved_Manager.ViewModels.Pages
 {
-    public partial class HomeViewModel(ICellManageService cellManageService) : ObservableObject, INavigationAware
+    public partial class HomeViewModel(ICellManageService cellManageService, WindowsProviderService windowsProviderService) : ObservableObject, INavigationAware
     {
         private bool _isInitialized = false;
 
@@ -43,12 +45,20 @@ namespace Cryopreserved_Manager.ViewModels.Pages
         [RelayCommand]
         private void Edit()
         {
-            cellManageService.ModifyCellDB(SelectedCell);
+            windowsProviderService.Show<CellEditWindow>();
+            WeakReferenceMessenger.Default.Send(new TransferCellInfo { cellInfo = SelectedCell });
         }
         [RelayCommand]
         private void Delete()
         {
-            cellManageService.DeleteCellInfo(SelectedCell.Key);
+            if (MessageBox.Show("선택하신 정보가 삭제됩니다.", "경고", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                cellManageService.DeleteCellInfo(SelectedCell.Key);
+            }
+            else
+            {
+                
+            }
         }
     }
 }

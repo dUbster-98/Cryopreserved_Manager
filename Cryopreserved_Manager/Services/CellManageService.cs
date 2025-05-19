@@ -21,7 +21,7 @@ namespace Cryopreserved_Manager.Services
 
     public class CellManageService : ICellManageService
     {
-        public static string MyConString = "Server=127.0.0.1;Port=3306;DataBase=CellList;Uid=root;pwd=1234;";
+        public static string MyConString = "Server=127.0.0.1;Port=3306;DataBase=Cyro;Uid=root;pwd=1234;";
 
         private UserInfo m_loggedInUser = new UserInfo();
         static private List<CellInfo> CellList = new List<CellInfo>();
@@ -45,7 +45,7 @@ namespace Cryopreserved_Manager.Services
                 {
                     connection.Open();
                     var cmd = connection.CreateCommand();
-                    cmd.CommandText = $"CREATE DATABASE IF NOT EXISTS CellList;";
+                    cmd.CommandText = $"CREATE DATABASE IF NOT EXISTS Cyro;";
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -62,12 +62,8 @@ namespace Cryopreserved_Manager.Services
                     {
                         string uuid = Guid.NewGuid().ToString();
 
-                        command.CommandText = "CREATE TABLE IF NOT EXISTS CellList(CellKey VARCHAR(255) PRIMARY KEY, CellName VARCHAR(50), Quantity VARCHAR(10), Location VARCHAR(50), " +
-                            "ReceiptDay VARCHAR(50), BarcodeText VARCHAR(50), State VARCHAR(50));";
-                        command.ExecuteNonQuery();
-
-                        command.CommandText = "INSERT INTO CellList (CellKey, CellName, Quantity, Location, ReceiptDay, BarcodeText, State) " +
-                            "VALUES (@key, @cellName, @quantity, @location, @receiptDay, @barcodeText, @state)";
+                        command.CommandText = "INSERT INTO CellList (CellKey, CellName, Quantity, Location, ReceiptDay, BarcodeText, State, Desc) " +
+                            "VALUES (@key, @cellName, @quantity, @location, @receiptDay, @barcodeText, @state, @description)";
                         command.Parameters.AddWithValue("@key", uuid);
                         command.Parameters.AddWithValue("@cellName", cellInfo.Name);
                         command.Parameters.AddWithValue("@quantity", cellInfo.Quantity);
@@ -75,6 +71,7 @@ namespace Cryopreserved_Manager.Services
                         command.Parameters.AddWithValue("@receiptDay", cellInfo.ReceiptDay);
                         command.Parameters.AddWithValue("@barcodeText", cellInfo.BarcodeText);
                         command.Parameters.AddWithValue("@state", cellInfo.State);
+                        command.Parameters.AddWithValue("@description", cellInfo.Desc);
                         command.ExecuteNonQuery();                  
                     }
                     db.Close();
@@ -93,7 +90,24 @@ namespace Cryopreserved_Manager.Services
 
         public void DeleteCellInfo(string cellId)
         {
-            // Delete a cell info record from the database by ID
+            try
+            {
+                using (MySqlConnection db = new MySqlConnection(MyConString))
+                {
+                    db.Open();
+                    using (var command = db.CreateCommand())
+                    {
+
+
+                        command.CommandText = "DELETE FROM CellList WHERE CellKey = @key";
+                        command.Parameters.AddWithValue("@key", cellId);
+                    }
+                }
+            }
+            catch
+            {
+
+            }
         }
 
         public List<CellInfo> GetAllCellInfos()
@@ -107,6 +121,10 @@ namespace Cryopreserved_Manager.Services
                     db.Open();
                     using (var command = db.CreateCommand())
                     {
+                        command.CommandText = "CREATE TABLE IF NOT EXISTS CellList(CellKey VARCHAR(255) PRIMARY KEY, CellName VARCHAR(50), Quantity VARCHAR(10), Location VARCHAR(50), " +
+                                              "ReceiptDay VARCHAR(50), BarcodeText VARCHAR(50), State VARCHAR(50), Description VARCHAR(255));";
+                        command.ExecuteNonQuery();
+
                         command.CommandText = "SELECT * FROM CellList";
 
                         using (MySqlDataReader reader = command.ExecuteReader())
@@ -122,6 +140,7 @@ namespace Cryopreserved_Manager.Services
                                 cell.ReceiptDay = reader.GetString(4);
                                 cell.BarcodeText = reader.GetString(5);
                                 cell.State = reader.GetString(6);
+                                cell.Desc = reader.GetString(7);
                                 CellList.Add(cell);
                             }
                         }
